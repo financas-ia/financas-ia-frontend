@@ -8,8 +8,6 @@ import telefoneIcon from "@/features/auth/assets/telefoneIcon.svg";
 import cpfIcon from "@/features/auth/assets/cpfIcon.svg";
 import googleIcon from "@/features/auth/assets/googleIcon.svg";
 import photoIcon from "@/features/auth/assets/photoIcon.svg";
-import hidePassIcon from "@/features/auth/assets/hidePassIcon.svg";
-import viewPassIcon from "@/features/auth/assets/viewPassIcon.svg";
 import passwordIcon from "@/features/auth/assets/passwordIcon.svg";
 
 import React, { useState } from "react";

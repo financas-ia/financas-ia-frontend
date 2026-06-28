@@ -1,5 +1,5 @@
 import AuthLayout from "@/components/layout/AuthLayout";
-import CadastroForm from "../components/CadastroForm";
+import CadastroForm from "@/features/auth/components/CadastroForm";
 
 export default function CadastroPage() {
     return(

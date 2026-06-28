@@ -15,7 +15,7 @@ export default function AuthInput({ label, icon, onTogglePassword, showPassword,
             <label className="text-[16px] text-(--color-dark)">{label}</label>
             <div className="relative flex items-center">
                 {icon && <img src={icon} alt="Icone" className="absolute left-3 w-[20px] h-[20px]" />}
-                <input className="w-[400px] h-[40px] rounded-[10px] border-solid border-(--color-dark)/20 px-3 bg-[#FFFFFF] pl-10" {...props} />
+                <input className={`w-[400px] h-[40px] rounded-[10px] border-solid border-(--color-dark)/20 px-3 bg-[#FFFFFF] ${icon ? 'pl-10' : 'pl-3'} focus:border-(--color-primary) outline-none focus:ring-1 focus:ring-(--color-primary)`} {...props} />
                 {onTogglePassword && (
                     <button type="button" onClick={onTogglePassword} className="absolute right-3">
                         <img src={showPassword ? hidePassIcon : viewPassIcon} alt="Toggle Password Visibility" className="w-[20px] h-[20px]" />

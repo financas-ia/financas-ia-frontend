@@ -57,10 +57,10 @@ export default function CadastroForm() {
                 </>
             ) : (
                 <>
-                <Button size='md' onClick={() => setStep(0)}>
+                <Button type="button" size='md' onClick={() => setStep(0)}>
                     Voltar
                 </Button>
-                <Button size='md'>Cadastrar</Button>
+                <Button type="button" size='md'>Cadastrar</Button>
                 </>
             )}
         </form>

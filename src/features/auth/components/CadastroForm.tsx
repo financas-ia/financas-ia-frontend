@@ -1,5 +1,7 @@
 import AuthInput from "@/features/auth/components/AuthInput";
 import Button from '@/components/ui/Button';
+import { api } from "@/services/api";
+import { useCadastro } from "@/hooks/useCadastro";
 
 // Icons
 import emailIcon from "@/features/auth/assets/emailIcon.svg";
@@ -14,33 +16,35 @@ import React, { useState } from "react";
 
 
 export default function CadastroForm() {
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const [step, setStep] = useState(0);
-    const handleSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
-        if (step === 0) {
-            setStep(1);
-        } else {
-            alert("Cadastro concluído!");
-        }
-    };
+    const {
+        step,
+        setStep,
+        isLoading,
+        showPassword,
+        setShowPassword,
+        showConfirmPassword,
+        setShowConfirmPassword,
+        formData,
+        setFormData,
+        handleChange,
+        handleSubmit
+    } = useCadastro();
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-[15px] mt-5">
             {step === 0 ? (
                 <>
-                    <AuthInput label="Nome" type="text" placeholder="Digite seu nome" icon={nameIcon} />
-                    <AuthInput label="Endereço de e-mail" type="email" placeholder="Digite seu email" icon={emailIcon}/>
-                    <AuthInput label="Telefone" type="text" placeholder="Digite seu telefone" icon={telefoneIcon} />
-                    <AuthInput label="CPF" type="text" placeholder="Digite seu CPF" icon={cpfIcon} />
+                    <AuthInput label="Nome" type="text" value={formData.nome} onChange={handleChange} placeholder="Digite seu nome" icon={nameIcon} />
+                    <AuthInput label="Endereço de e-mail" value={formData.email} onChange={handleChange} type="email" placeholder="Digite seu email" icon={emailIcon}/>
+                    <AuthInput label="Telefone" type="text" value={formData.telefone} onChange={handleChange} placeholder="Digite seu telefone" icon={telefoneIcon} />
+                    <AuthInput label="CPF" type="text" value={formData.cpf} onChange={handleChange} placeholder="Digite seu CPF" icon={cpfIcon} />
                 </>
             ) : (
                 <>
-                    <AuthInput label="Data de Nascimento" type="date" placeholder="Digite sua data de nascimento" />
-                    <AuthInput label="Senha" type={showPassword ? "text" : "password"} placeholder="Digite sua senha" icon={passwordIcon} showPassword={showPassword} onTogglePassword={() => setShowPassword(!showPassword)} />
-                    <AuthInput label="Confirmar Senha" type={showConfirmPassword ? "text" : "password"} placeholder="Confirme sua senha" icon={passwordIcon} showPassword={showConfirmPassword} onTogglePassword={() => setShowConfirmPassword(!showConfirmPassword)} />
-                    <AuthInput label="Foto de Perfil" type="text" placeholder="Escolha uma foto de perfil" icon={photoIcon} />
+                    <AuthInput label="Data de Nascimento" type="date" value={formData.dataNascimento} onChange={handleChange} placeholder="Digite sua data de nascimento" />
+                    <AuthInput label="Senha" type={showPassword ? "text" : "password"} value={formData.senha} onChange={handleChange} placeholder="Digite sua senha" icon={passwordIcon} showPassword={showPassword} onTogglePassword={() => setShowPassword(!showPassword)} />
+                    <AuthInput label="Confirmar Senha" type={showConfirmPassword ? "text" : "password"} value={formData.confirmarSenha} onChange={handleChange} placeholder="Confirme sua senha" icon={passwordIcon} showPassword={showConfirmPassword} onTogglePassword={() => setShowConfirmPassword(!showConfirmPassword)} />
+                    <AuthInput label="Foto de Perfil" type="text" value={formData.fotoPerfil} onChange={handleChange} placeholder="Escolha uma foto de perfil" icon={photoIcon} />
                 </>
             )}
             {step === 0 ? (
@@ -60,7 +64,7 @@ export default function CadastroForm() {
                 <Button type="button" size='md' onClick={() => setStep(0)}>
                     Voltar
                 </Button>
-                <Button type="button" size='md'>Cadastrar</Button>
+                <Button type="submit" size='md' disabled={isLoading}>{isLoading ? "Cadastrando..." : "Cadastrar"}</Button>
                 </>
             )}
         </form>

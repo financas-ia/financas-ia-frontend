@@ -1,6 +1,5 @@
 import AuthInput from "@/features/auth/components/AuthInput";
 import Button from '@/components/ui/Button';
-import { api } from "@/services/api";
 import { useCadastro } from "@/hooks/useCadastro";
 
 // Icons
@@ -12,7 +11,6 @@ import googleIcon from "@/features/auth/assets/googleIcon.svg";
 import photoIcon from "@/features/auth/assets/photoIcon.svg";
 import passwordIcon from "@/features/auth/assets/passwordIcon.svg";
 
-import React, { useState } from "react";
 
 
 export default function CadastroForm() {
@@ -25,7 +23,6 @@ export default function CadastroForm() {
         showConfirmPassword,
         setShowConfirmPassword,
         formData,
-        setFormData,
         handleChange,
         handleSubmit
     } = useCadastro();

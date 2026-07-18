@@ -8,10 +8,6 @@ import passwordIcon from "@/features/auth/assets/passwordIcon.svg";
 import googleIcon from "@/features/auth/assets/googleIcon.svg";
 import React from "react";
 
-const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    alert("Enviando infos para o back!");
-};
 
 const handleGoogleLogin = () => {
     alert("Login com Google!");

@@ -6,7 +6,6 @@ import { useLogin } from "@/hooks/useLogin";
 import emailIcon from "@/features/auth/assets/emailIcon.svg";
 import passwordIcon from "@/features/auth/assets/passwordIcon.svg";
 import googleIcon from "@/features/auth/assets/googleIcon.svg";
-import React from "react";
 
 
 const handleGoogleLogin = () => {

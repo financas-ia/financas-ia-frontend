@@ -3,9 +3,8 @@ export interface CadastroPayload {
     email: string;
     password: string;
     cpf: string;
-    phone: string;
-    birthDate: string;
-    avatar: string;
+    phoneNumber: string;
+    dateOfBirth: string;
 }
 
 export interface LoginPayload {

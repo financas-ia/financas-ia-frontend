@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { authService } from '@/services/auth.service';
+import {toast} from 'react-toastify';
 
 export function useCadastro(){
 
@@ -16,13 +17,13 @@ export function useCadastro(){
         dataNascimento: '',
         senha: '', 
         confirmarSenha: '',
-        fotoPerfil: ''
+        fotoPerfil: null as File | null
 
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = e.target;
-        setFormData(prev => ({...prev, [name]: value}));
+        const {name, value, type, files} = e.target;
+        setFormData(prev => ({...prev, [name]: type === 'file' && files ? files[0] : value}));
     };
 
     const handleSubmit = async (event: React.FormEvent) => {
@@ -34,29 +35,47 @@ export function useCadastro(){
         }
 
         if (formData.senha !== formData.confirmarSenha){
-            alert("Senhas não coincidem!");
+            toast.error('As senhas não coincidem!');
             return;
         }
 
         try {
             setIsLoading(true);
 
-            await authService.cadastro({
+            const responseCadastro = await authService.cadastro({
                 name: formData.nome,
                 email: formData.email,
-                phone: formData.telefone,
+                phoneNumber: formData.telefone,
                 cpf: formData.cpf,
-                birthDate: formData.dataNascimento,
+                dateOfBirth: formData.dataNascimento,
                 password: formData.senha,
-                avatar: formData.fotoPerfil
+
             });
 
-            alert("Cadastro realizado!");
+            const idUsuario = responseCadastro.id;
+
+            if(formData.fotoPerfil && idUsuario){
+
+                const responseLogin = await authService.login({
+                    email: formData.email,
+                    password: formData.senha
+                });
+
+                const tokenJwt = responseLogin.token;
+
+                const fotoPayload = new FormData();
+                fotoPayload.append("photo", formData.fotoPerfil);
+
+                await authService.uploadFoto(idUsuario, fotoPayload, tokenJwt);
+
+            }
+
+            toast.success('Cadastro realizado com sucesso!');
             
         }catch (error: any){
             console.error("Erro no cadastro: ", error);
             const errorMessage = error.response?.data?.message || "Erro ao realizar cadastro";
-            alert(errorMessage);
+            toast.error(errorMessage);
         }finally{
             setIsLoading(false);
         }

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { authService } from '@/services/auth.service';
+import { toast } from 'react-toastify';
 
 export function useLogin(){
     const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     
-
     const [formData, setFormData] = useState({
         email: '',
         senha: ''
@@ -28,12 +28,12 @@ export function useLogin(){
             });
 
             localStorage.setItem('@PredictIA:token', response.token);
-            alert("Login realizado!")
+            toast.success('Login realizado com sucesso!')
 
         } catch (error: any) {
             console.error("Erro no login:", error);
             const errorMessage = error.response?.data?.message || "E-mail ou senha incorretos";
-            alert(errorMessage);
+            toast.error(errorMessage);
         } finally {
             setIsLoading(false);
         }

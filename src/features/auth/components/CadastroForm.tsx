@@ -8,7 +8,6 @@ import nameIcon from "@/features/auth/assets/nameIcon.svg";
 import telefoneIcon from "@/features/auth/assets/telefoneIcon.svg";
 import cpfIcon from "@/features/auth/assets/cpfIcon.svg";
 import googleIcon from "@/features/auth/assets/googleIcon.svg";
-import photoIcon from "@/features/auth/assets/photoIcon.svg";
 import passwordIcon from "@/features/auth/assets/passwordIcon.svg";
 
 

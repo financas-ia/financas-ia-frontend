@@ -16,4 +16,19 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    proxy: {
+      // Toda requisição que começar com /auth será redirecionada para o Java
+      '/auth': {
+        target: 'http://localhost:8081',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/users': {
+        target: 'http://localhost:8081',
+        changeOrigin: true,
+        secure: false,
+      }
+    }
+  },
 })

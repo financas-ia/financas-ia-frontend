@@ -67,7 +67,7 @@ export default function AuthLayout( { children }: AuthLayoutProps ) {
         </div>
       </div>
       <div className="hidden lg:flex lg:w-[40%] align-center justify-center mt-10">
-        <div className="relative w-[80%] aspect-[3/5] flex items-center justify-center">
+        <div className="relative w-[63%] aspect-[3/5] flex items-center justify-center">
           <div className="absolute w-full h-full bg-(--color-primary) rounded-[10px] -translate-x-3 translate-y-3"></div>
           <div className="relative w-full h-full bg-(--color-dark) rounded-[10px] flex items-end">
             <img src={config.image} alt={`Imagem de ${config.label}`}/>

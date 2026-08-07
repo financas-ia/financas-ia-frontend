@@ -8,7 +8,6 @@ import nameIcon from "@/features/auth/assets/nameIcon.svg";
 import telefoneIcon from "@/features/auth/assets/telefoneIcon.svg";
 import cpfIcon from "@/features/auth/assets/cpfIcon.svg";
 import googleIcon from "@/features/auth/assets/googleIcon.svg";
-import photoIcon from "@/features/auth/assets/photoIcon.svg";
 import passwordIcon from "@/features/auth/assets/passwordIcon.svg";
 
 
@@ -41,12 +40,12 @@ export default function CadastroForm() {
                     <AuthInput name="dataNascimento" label="Data de Nascimento" type="date" value={formData.dataNascimento} onChange={handleChange} placeholder="Digite sua data de nascimento" />
                     <AuthInput name="senha" label="Senha" type={showPassword ? "text" : "password"} value={formData.senha} onChange={handleChange} placeholder="Digite sua senha" icon={passwordIcon} showPassword={showPassword} onTogglePassword={() => setShowPassword(!showPassword)} />
                     <AuthInput name="confirmarSenha" label="Confirmar Senha" type={showConfirmPassword ? "text" : "password"} value={formData.confirmarSenha} onChange={handleChange} placeholder="Confirme sua senha" icon={passwordIcon} showPassword={showConfirmPassword} onTogglePassword={() => setShowConfirmPassword(!showConfirmPassword)} />
-                    <AuthInput name="fotoPerfil" label="Foto de Perfil" type="text" value={formData.fotoPerfil} onChange={handleChange} placeholder="Escolha uma foto de perfil" icon={photoIcon} />
+                    <AuthInput name="fotoPerfil" label="Foto de Perfil" type="file" accept="image/*" onChange={handleChange} placeholder="Escolha uma foto de perfil" />
                 </>
             )}
             {step === 0 ? (
                 <>
-                    <Button size='md'>Continuar</Button>
+                    <Button type='submit' size='md'>Continuar</Button>
                     <div className="flex items-center justify-center gap-4 text-sm text-[var(--color-dark)] mt-1">
                         <div className="w-[100%] h-[1px] bg-[var(--color-dark)]/60"></div>
                         <span>ou</span>
@@ -58,7 +57,10 @@ export default function CadastroForm() {
                 </>
             ) : (
                 <>
-                <Button type="button" size='md' onClick={() => setStep(0)}>
+                <Button type="button" size='md' onClick={(e) => {
+                    e.preventDefault();
+                    setStep(0);
+                }}>
                     Voltar
                 </Button>
                 <Button type="submit" size='md' disabled={isLoading}>{isLoading ? "Cadastrando..." : "Cadastrar"}</Button>
